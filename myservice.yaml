@@ -1,0 +1,18 @@
+apiVersion: v1            # Version API du Service
+kind: Service             # Type de ressource : Service
+metadata:
+  name: nginx-service     # Nom du Service
+spec:
+  type: NodePort          # Expose via un port du Node
+  selector:
+    app: nginx            # Pods ciblés par ce label
+    environment: production
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80          # Port exposé par le Service
+      targetPort: http-nginx  # Nom du port dans le Pod
+    - name: https
+      protocol: TCP
+      port: 443         # Port exposé par le Service
+      targetPort: https-nginx # Nom du port dans le Pod

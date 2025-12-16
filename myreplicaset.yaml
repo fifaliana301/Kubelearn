@@ -1,0 +1,25 @@
+apiVersion: apps/v1          # Version de l'API Kubernetes pour les ReplicaSets
+kind: ReplicaSet              # Type de ressource : ReplicaSet
+metadata:
+  name: nginx-replicaset     # Nom du ReplicaSet
+  labels:
+    tier: backend            # Label pour catégoriser le ReplicaSet
+spec:
+  replicas: 3                # Nombre de pods souhaités
+  selector:
+    matchLabels:
+      app: nginx             # Le ReplicaSet sélectionne les pods ayant ce label
+      environment: production
+
+  template:                  # Modèle utilisé pour créer les pods
+    metadata:
+      labels:
+        app: nginx           # Label appliqué au pod. Doit correspondre au selector.
+        environment: production
+
+    spec:
+      containers:
+        - name: nginx-container     # Nom du conteneur
+          image: nginx:alpine       # Image Docker utilisée (version alpine légère)
+          # ports:
+          #   - containerPort: 80     # Port exposé dans le pod (port interne de Nginx)

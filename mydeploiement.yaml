@@ -20,4 +20,8 @@ spec:
         - name: nginx-container     # Nom du conteneur
           image: nginx:alpine       # Image Docker utilisée (version alpine légère)
           ports:
-            - containerPort: 80     # Port exposé dans le pod (port interne de Nginx)
+            - containerPort: 80    # Port exposé dans le pod (port interne de Nginx)
+              name: http-nginx   # Nom du port pour référence dans le Service
+            - containerPort: 443   # Port exposé dans le pod pour HTTPS
+              name: https-nginx  # Nom du port pour référence dans le Service
+              
